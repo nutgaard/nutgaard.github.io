@@ -19,6 +19,6 @@
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "publish": "npm run build && gh-pages -d public -b master"
+    "publish": "npm run build && gh-pages -d build -b master"
   }
 }
