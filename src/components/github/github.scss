@@ -3,4 +3,20 @@
 
 .github {
   @include panel();
+  display: flex;
+  flex-wrap: wrap;
+
+  &__repo {
+    @include panel(true, true);
+    width: 25%;
+    flex-basis: 25%;
+    flex-grow: 1;
+    border: 1px solid $gray;
+    margin: 0.5rem;
+
+    &--haspages {
+      color: $dark;
+      background-color: #ffffff;
+    }
+  }
 }
