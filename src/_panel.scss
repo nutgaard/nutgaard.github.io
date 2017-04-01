@@ -1,0 +1,16 @@
+@mixin panel($rounded: false, $padding: true) {
+  @if($padding) {
+    padding: 1rem 1.5rem;
+  }
+
+  @if($rounded) {
+    border-radius: $border-radius;
+  }
+
+  & > *:first-child {
+    margin-top: 0;
+  }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}

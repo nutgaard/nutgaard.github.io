@@ -1,0 +1,6 @@
+.github {
+  padding: 1rem 1.5rem; }
+  .github > *:first-child {
+    margin-top: 0; }
+  .github > *:last-child {
+    margin-bottom: 0; }

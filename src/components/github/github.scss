@@ -1,0 +1,6 @@
+@import "./../../variables";
+@import "./../../panel";
+
+.github {
+  @include panel();
+}

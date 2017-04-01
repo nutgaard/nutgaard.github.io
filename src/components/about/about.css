@@ -1,0 +1,8 @@
+.about {
+  padding: 1rem 1.5rem; }
+
+.about > *:first-child {
+  margin-top: 0; }
+
+.about > *:last-child {
+  margin-bottom: 0; }

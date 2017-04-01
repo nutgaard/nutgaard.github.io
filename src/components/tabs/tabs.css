@@ -1,0 +1,21 @@
+.tabs__tabbutton {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #b1b1b1;
+  border-radius: 4px 4px 0 0;
+  background: #cccccc none; }
+  .tabs__tabbutton--isactive {
+    background-color: #efefef;
+    border-bottom-color: #efefef; }
+  .tabs__tabbutton:focus {
+    outline: none; }
+
+.tabs__content {
+  border-radius: 0.25rem;
+  border: 1px solid #b1b1b1;
+  border-top-left-radius: 0;
+  margin-top: -1px;
+  background-color: #efefef; }
+  .tabs__content > *:first-child {
+    margin-top: 0; }
+  .tabs__content > *:last-child {
+    margin-bottom: 0; }

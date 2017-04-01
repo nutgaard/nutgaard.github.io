@@ -1,0 +1,32 @@
+@import "./../../variables";
+@import "./../../panel";
+
+$bgcolor: $bgwhite;
+$bordercolor: $darkgray;
+$inactiveColor: $gray;
+
+.tabs {
+  &__tabbutton {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid $bordercolor;
+    border-radius: 4px 4px 0 0;
+    background: $inactiveColor none;
+
+    &--isactive {
+      background-color: $bgcolor;
+      border-bottom-color: $bgcolor;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__content {
+    @include panel(true, false);
+    border: 1px solid $bordercolor;
+    border-top-left-radius: 0;
+    margin-top: -1px;
+    background-color: $bgcolor;
+  }
+}
