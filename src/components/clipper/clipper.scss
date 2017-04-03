@@ -1,0 +1,24 @@
+@import "./../../variables";
+
+.clipper {
+  position: relative;
+  display: inline-block;
+  color: $dark;
+  text-decoration: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__element {
+
+  }
+  &__overlay {
+    background-color: $dark;
+    color: $white;
+    left: 0;
+    top: 0;
+    position: absolute;
+    transition: clip-path ease-in-out 200ms;
+  }
+}
