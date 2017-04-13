@@ -1,6 +1,5 @@
 import React, { Component, PropTypes as PT } from 'react';
 import classNames from 'classnames';
-import Collapse from 'react-collapse';
 
 import './tabs.css';
 
@@ -37,9 +36,9 @@ class Tabs extends Component {
         return (
             <div className="tabs">
                 {tabElements}
-                <Collapse isOpened={true} className="tabs__content">
+                <div className="tabs__content">
                     {activeSection}
-                </Collapse>
+                </div>
             </div>
         );
     }

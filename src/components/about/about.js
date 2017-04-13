@@ -6,7 +6,7 @@ function About() {
         <div className="about">
             <h1>About</h1>
             <pre>
-                This is were I would but the about section...
+                This is where I would put the about section...
             </pre>
         </div>
     );

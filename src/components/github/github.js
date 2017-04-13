@@ -31,6 +31,13 @@ class Github extends Component {
     }
 
     componentDidMount() {
+        // Fixture for development...
+        //setTimeout(() => {
+        //    const data = require('./../../fixtures/github_repos.json');
+        //    this.setState({ isLoading: false, data });
+        //}, 1000);
+
+        // Real integration
         fetch("https://api.github.com/users/nutgaard/repos?per_page=100")
             .then((resp) => resp.json())
             .then((data) => this.setState({ isLoading: false, data }));
