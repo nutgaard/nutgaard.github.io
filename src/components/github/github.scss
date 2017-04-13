@@ -3,14 +3,18 @@
 
 .github {
   @include panel();
-  display: flex;
-  flex-wrap: wrap;
+
+  &__repos {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__emptyrepo {
+    @include panel(true, true);
+  }
 
   &__repo {
     @include panel(true, true);
-    width: 25%;
-    flex-basis: 25%;
-    flex-grow: 1;
     border: 1px solid $gray;
     margin: 0.5rem;
 
