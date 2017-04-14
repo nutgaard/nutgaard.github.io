@@ -24,7 +24,7 @@ class Softbreak extends React.Component<SoftbreakProps, {}> {
         const { tag, rules, ...restProps } = this.props;
         const softBreakedChild = addBreaks(this.props.children as string, rules as ((a: string) => string)[]);
         return (
-            createElement(tag, restProps, softBreakedChild)
+            createElement(tag!, restProps, softBreakedChild)
         );
     }
 }

@@ -65,8 +65,9 @@ class Clipper extends React.Component<ClipperProps, ClipperState> {
             })()
         };
 
+        const SafeTag = Tag!;
         return (
-            <Tag
+            <SafeTag
                 className={cls(className)}
                 onMouseEnter={this.onDomEnter(ClippeStateUpdate.hover)}
                 onMouseLeave={this.onDomLeave(ClippeStateUpdate.hover)}
@@ -78,7 +79,7 @@ class Clipper extends React.Component<ClipperProps, ClipperState> {
                 <div className="clipper__element clipper__overlay" style={overlayStyle} aria-hidden="true">
                     {children}
                 </div>
-            </Tag>
+            </SafeTag>
         );
     }
 }

@@ -2,12 +2,11 @@ import * as React from 'react';
 import Header from './components/header/header';
 import Tabs from './components/tabs/tabs';
 import Footer from './components/footer/footer';
-
 import Github from './components/github/github';
 import About from './components/about/about';
 import Clipper from './components/clipper/clipper';
 
-class Application extends React.Component<{}, null> {
+class Application extends React.Component<{}, {}> {
     render() {
         return (
             <div className="application">

@@ -31,7 +31,7 @@ class Tabs extends React.Component<TabsProps, TabsState> {
             console.error(`Tab: Length mismatch, found ${tabTitles.length} titles and ${Children.count(children)} children`); // tslint:disable-line
         }
 
-        const activeSection = children[this.state.index];
+        const activeSection = children![this.state.index];
         const tabElements = tabTitles.map((title, index) => (
             <button className={btnCls(index, this.state.index)} onClick={() => this.setState({ index })}
                     key={`${title}`}>

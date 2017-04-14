@@ -8,7 +8,7 @@ export interface AsyncData {
 
 export interface AsyncProps<T extends AsyncData> {
     dependency: T;
-    children?: (t: T) => ReactElement<any>; // tslint:disable-line
+    renderer: (t: T) => ReactElement<any>; // tslint:disable-line
 }
 
 class Async<T extends AsyncData> extends Component<AsyncProps<T>, {}> {
@@ -16,7 +16,7 @@ class Async<T extends AsyncData> extends Component<AsyncProps<T>, {}> {
         if (this.props.dependency.isLoading) {
             return <Loader />;
         }
-        return this.props.children(this.props.dependency);
+        return this.props.renderer(this.props.dependency);
     }
 }
 

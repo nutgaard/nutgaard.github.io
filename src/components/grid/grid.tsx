@@ -40,6 +40,7 @@ class Grid extends React.Component<GridProps, {}> {
 
     render() {
         const { className, small, medium, large, padToMatch, children } = this.props;
+
         const childLength = Array.isArray(children) ? children.length : 1;
         const sizes = { small, medium, large };
         const columns = Number(sizes[getSize()]);
@@ -48,10 +49,10 @@ class Grid extends React.Component<GridProps, {}> {
         if (padToMatch) {
             padSize = ((Math.floor(childLength / columns) + 1) * columns) - childLength;
         }
-        const padElements = new Array(padSize).fill(0).map((_, i) => cloneElement(padToMatch, { key: i }));
+        const padElements = new Array(padSize).fill(0).map((_, i) => cloneElement(padToMatch!, { key: i }));
 
         return (
-            <div className={cls(className, small, medium, large)}>
+            <div className={cls(className!, small!, medium!, large!)}>
                 {children}
                 {padElements}
             </div>
