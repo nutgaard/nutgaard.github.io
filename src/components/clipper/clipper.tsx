@@ -18,9 +18,7 @@ interface ClipperState {
     focus: boolean;
 }
 
-enum ClippeStateUpdate {
-    hover, focus
-}
+type ClippeStateUpdate = 'hover' | 'focus';
 
 class Clipper extends React.Component<ClipperProps, ClipperState> {
     public static defaultProps: Partial<ClipperProps> = {
@@ -41,13 +39,11 @@ class Clipper extends React.Component<ClipperProps, ClipperState> {
     }
 
     onDomEnter(dom: ClippeStateUpdate) {
-        const stateProp = ClippeStateUpdate[dom];
-        return () => this.setState({ [stateProp]: true } as any); // tslint:disable-line
+        return () => this.setState({ [dom]: true } as any); // tslint:disable-line
     }
 
     onDomLeave(dom: ClippeStateUpdate) {
-        const stateProp = ClippeStateUpdate[dom];
-        return () => this.setState({ [stateProp]: false } as any); // tslint:disable-line
+        return () => this.setState({ [dom]: false } as any); // tslint:disable-line
     }
 
     render() {
@@ -69,10 +65,10 @@ class Clipper extends React.Component<ClipperProps, ClipperState> {
         return (
             <SafeTag
                 className={cls(className)}
-                onMouseEnter={this.onDomEnter(ClippeStateUpdate.hover)}
-                onMouseLeave={this.onDomLeave(ClippeStateUpdate.hover)}
-                onFocus={this.onDomEnter(ClippeStateUpdate.focus)}
-                onBlur={this.onDomLeave(ClippeStateUpdate.focus)}
+                onMouseEnter={this.onDomEnter('hover')}
+                onMouseLeave={this.onDomLeave('hover')}
+                onFocus={this.onDomEnter('focus')}
+                onBlur={this.onDomLeave('focus')}
                 {...props}
             >
                 <div className="clipper__element">{children}</div>

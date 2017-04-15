@@ -2,21 +2,55 @@ import * as React from 'react';
 import { Component, ReactElement } from 'react';
 import Loader from './../loader/loader';
 
-export interface AsyncData {
-    isLoading: boolean;
+export enum AsyncState {
+    NOT_STARTED, RELOADING, LOADING, OK, ERROR
+}
+const asyncStatePrecedence = [
+    AsyncState.ERROR,
+    AsyncState.LOADING,
+    AsyncState.RELOADING,
+    AsyncState.NOT_STARTED,
+    AsyncState.OK
+];
+const loaderStates = [
+    AsyncState.LOADING,
+    AsyncState.RELOADING,
+    AsyncState.NOT_STARTED
+];
+
+export interface AsyncData<T> {
+    isLoading: AsyncState;
+    data: T | null;
 }
 
-export interface AsyncProps<T extends AsyncData> {
-    dependency: T;
-    renderer: (t: T) => ReactElement<any>; // tslint:disable-line
+export interface AsyncProps {
+    dependencies: AsyncData<any>[]; // tslint:disable-line
+    renderer: (data: any[]) => ReactElement<any>; // tslint:disable-line
 }
 
-class Async<T extends AsyncData> extends Component<AsyncProps<T>, {}> {
-    render() {
-        if (this.props.dependency.isLoading) {
-            return <Loader />;
+export function getAsyncState(dependencies: AsyncData<any>[]): AsyncState { // tslint:disable-line
+    for (const precedence of asyncStatePrecedence) {
+        const dep = dependencies.find((dependency) => dependency.isLoading === precedence);
+        if (dep) {
+            return precedence;
         }
-        return this.props.renderer(this.props.dependency);
+    }
+    return AsyncState.NOT_STARTED;
+}
+
+class Async extends Component<AsyncProps, {}> {
+    render() {
+        const currentState: AsyncState = getAsyncState(this.props.dependencies);
+
+        if (loaderStates.indexOf(currentState) >= 0) {
+            return <Loader />;
+        } else if (currentState === AsyncState.ERROR) {
+            return (
+              <p aria-live="assertive" role="alert">Something went wrong...</p>
+            );
+        }
+
+        return this.props.renderer(this.props.dependencies);
     }
 }
 

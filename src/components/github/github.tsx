@@ -1,23 +1,17 @@
 import * as React from 'react';
 import Grid from './../grid/grid';
-import Async, { AsyncData } from './../async/async';
+import Async, { AsyncData, AsyncState } from './../async/async';
 import GithubRepoData from './githubrepodata';
 import './github.css';
 import GithubRepo from './github-repo';
 import GithubStatistics from './github-statistics';
 
-interface GithubData extends AsyncData {
-    data: GithubRepoData[] | null;
-}
-
-const GithubAsync = Async as new() => Async<GithubData>;
-
-class Github extends React.Component<{}, GithubData> {
+class Github extends React.Component<{}, AsyncData<GithubRepoData[]>> {
     constructor(props: {}) {
         super(props);
 
         this.state = {
-            isLoading: true,
+            isLoading: AsyncState.NOT_STARTED,
             data: null
         };
 
@@ -34,7 +28,7 @@ class Github extends React.Component<{}, GithubData> {
         // Real integration
         fetch('https://api.github.com/users/nutgaard/repos?per_page=100')
             .then((resp) => resp.json())
-            .then((data) => this.setState({ isLoading: false, data }));
+            .then((data) => this.setState({ isLoading: AsyncState.OK, data }));
     }
 
     renderer() {
@@ -67,7 +61,7 @@ class Github extends React.Component<{}, GithubData> {
 
     render() {
         return (
-            <GithubAsync dependency={this.state as GithubData} renderer={this.renderer} />
+            <Async dependencies={[this.state]} renderer={this.renderer} />
         );
     }
 }
