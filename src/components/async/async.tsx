@@ -20,12 +20,12 @@ const loaderStates = [
 
 export interface AsyncData<T> {
     isLoading: AsyncState;
-    data: T | null;
+    data: T | null;
 }
 
 export interface AsyncProps {
-    dependencies: AsyncData<any>[]; // tslint:disable-line
-    renderer: (data: any[]) => ReactElement<any>; // tslint:disable-line
+    dependencies: AsyncData<any>[] | AsyncData<any>; // tslint:disable-line
+    renderer: (...data: any[]) => ReactElement<any>; // tslint:disable-line
 }
 
 export function getAsyncState(dependencies: AsyncData<any>[]): AsyncState { // tslint:disable-line
@@ -38,9 +38,14 @@ export function getAsyncState(dependencies: AsyncData<any>[]): AsyncState { // t
     return AsyncState.NOT_STARTED;
 }
 
+function arrayOf<T>(value: T[] | T): T[] {
+    return Array.isArray(value) ? value : [value];
+}
+
 class Async extends Component<AsyncProps, {}> {
     render() {
-        const currentState: AsyncState = getAsyncState(this.props.dependencies);
+        const dependencies = arrayOf(this.props.dependencies);
+        const currentState: AsyncState = getAsyncState(dependencies);
 
         if (loaderStates.indexOf(currentState) >= 0) {
             return <Loader />;
@@ -50,7 +55,8 @@ class Async extends Component<AsyncProps, {}> {
             );
         }
 
-        return this.props.renderer(this.props.dependencies);
+        const data = dependencies.map((dependency) => dependency.data);
+        return this.props.renderer(...data);
     }
 }
 

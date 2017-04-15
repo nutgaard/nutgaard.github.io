@@ -61,7 +61,7 @@ class Github extends React.Component<{}, AsyncData<GithubRepoData[]>> {
 
     render() {
         return (
-            <Async dependencies={[this.state]} renderer={this.renderer} />
+            <Async dependencies={this.state} renderer={this.renderer} />
         );
     }
 }
