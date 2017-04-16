@@ -1,8 +1,9 @@
 import * as React from 'react';
-import GithubRepoData from './githubrepodata';
 import Softbreak from '../softbreak';
+import { Store } from '../../ducks/store';
+import GithubRepo = Store.GithubRepo;
 
-class GithubRepo extends React.Component<{ repo: GithubRepoData }, {}> {
+class GithubRepoElement extends React.Component<{ repo: GithubRepo }, {}> {
     render() {
         const { repo } = this.props;
         if (repo.has_pages) {
@@ -23,4 +24,4 @@ class GithubRepo extends React.Component<{ repo: GithubRepoData }, {}> {
     }
 }
 
-export default GithubRepo;
+export default GithubRepoElement;

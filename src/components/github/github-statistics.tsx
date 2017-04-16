@@ -1,6 +1,7 @@
 import * as React from 'react';
-import GithubRepoData from './githubrepodata';
 import Grid from '../grid/grid';
+import { Store } from '../../ducks/store';
+import GithubRepo = Store.GithubRepo;
 
 function maxBy<T>(list: T[], property: string): T {
     return list.reduce(
@@ -9,7 +10,7 @@ function maxBy<T>(list: T[], property: string): T {
     );
 }
 
-class GithubStatistics extends React.Component<{ repos: GithubRepoData[] }, {}> {
+class GithubStatistics extends React.Component<{ repos: GithubRepo[] }, {}> {
     render() {
         const { repos } = this.props;
 

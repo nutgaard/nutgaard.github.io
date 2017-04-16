@@ -1,38 +1,38 @@
 import * as React from 'react';
-import Grid from './../grid/grid';
-import Async, { AsyncData, AsyncState } from './../async/async';
-import GithubRepoData from './githubrepodata';
+import { connect, Dispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+import { fetchRepos } from '../../ducks/githubrepos';
+import { Store } from '../../ducks/store';
 import './github.css';
 import GithubRepo from './github-repo';
 import GithubStatistics from './github-statistics';
+import Grid from '../grid/grid';
+import Async from '../async/async';
 
-class Github extends React.Component<{}, AsyncData<GithubRepoData[]>> {
-    constructor(props: {}) {
+interface StateProps {
+    github: Store.Github;
+}
+
+interface DispatchProps {
+    actions: {
+        fetchRepos: () => ThunkAction<void, Store.Complete, void>
+    };
+}
+
+class Github extends React.Component<StateProps & DispatchProps, {}> {
+    constructor(props: StateProps & DispatchProps) {
         super(props);
-
-        this.state = {
-            isLoading: AsyncState.NOT_STARTED,
-            data: null
-        };
 
         this.renderer = this.renderer.bind(this);
     }
 
     componentDidMount() {
-        // Fixture for development...
-        // const data = require('./../../fixtures/github_repos.json');
-        // this.setState({ isLoading: false, data });
-        // setTimeout(() => {
-        // }, 1000);
-
-        // Real integration
-        fetch('https://api.github.com/users/nutgaard/repos?per_page=100')
-            .then((resp) => resp.json())
-            .then((data) => this.setState({ isLoading: AsyncState.OK, data }));
+        this.props.actions.fetchRepos();
     }
 
     renderer() {
-        const repos = this.state.data!
+        const repos = this.props.github.data!
             .map((repo) => ({ repo, date: new Date(repo.pushed_at) }))
             .sort((a, b) => {
                 if (a.repo.has_pages && b.repo.has_pages) {
@@ -61,9 +61,16 @@ class Github extends React.Component<{}, AsyncData<GithubRepoData[]>> {
 
     render() {
         return (
-            <Async dependencies={this.state} renderer={this.renderer} />
+            <Async dependencies={this.props.github} renderer={this.renderer}/>
         );
     }
 }
 
-export default Github;
+const mapStateToProps = (state: Store.Complete): StateProps => {
+    return { github: state.github };
+};
+const mapDispatchToProps = (dispatch: Dispatch<Store.Complete>) => ({
+    actions: bindActionCreators({ fetchRepos }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Github);

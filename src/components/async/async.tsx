@@ -19,8 +19,9 @@ const loaderStates = [
 ];
 
 export interface AsyncData<T> {
-    isLoading: AsyncState;
+    status: AsyncState;
     data: T | null;
+    error?: Error;
 }
 
 export interface AsyncProps {
@@ -30,7 +31,7 @@ export interface AsyncProps {
 
 export function getAsyncState(dependencies: AsyncData<any>[]): AsyncState { // tslint:disable-line
     for (const precedence of asyncStatePrecedence) {
-        const dep = dependencies.find((dependency) => dependency.isLoading === precedence);
+        const dep = dependencies.find((dependency) => dependency.status === precedence);
         if (dep) {
             return precedence;
         }
