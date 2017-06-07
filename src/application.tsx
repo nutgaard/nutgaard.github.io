@@ -36,7 +36,8 @@ class Application extends React.Component<{}, {}> {
                         </Clipper>
                     </div>
                     <main className="application__main">
-                        <Tabs tabTitles={['Github', 'About']}>
+                        <Tabs tabTitles={['Github repos', 'Github pages', 'About']}>
+                            <Github />
                             <Github />
                             <About />
                         </Tabs>

@@ -1,19 +1,8 @@
 import { AsyncData } from '../components/async/async';
+import { Domain } from '../domain';
+
 export namespace Store {
-
-    export type GithubRepo = {
-        has_pages: boolean;
-        name: string;
-        description: string;
-        watchers_count: number;
-        fork: boolean;
-        forks_count: number;
-        open_issues_count: number;
-        stargazers_count: number;
-        pushed_at: string;
-    }
-
-    export type Github = AsyncData<GithubRepo[]>
+    export type Github = AsyncData<Domain.GithubRepo[]>
 
     export type Complete = {
         github: Github

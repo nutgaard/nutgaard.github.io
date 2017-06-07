@@ -1,13 +1,13 @@
 import { ThunkAction } from 'redux-thunk';
-import { Store } from './store';
 import { AsyncState } from '../components/async/async';
-import GithubResponse = Store.GithubRepo;
+import { Store } from './store';
+import { Domain } from '../domain';
 
 export type Action = {
     type: 'START',
 } | {
     type: 'OK',
-    payload: GithubResponse[]
+    payload: Domain.GithubRepo[]
 } | {
     type: 'FAILED',
     error: Error
