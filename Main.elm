@@ -3,6 +3,7 @@ module Main exposing (..)
 import Html exposing (..)
 import Model exposing (Model, initialModel)
 import Msg exposing (Msg)
+import Repos
 import Update exposing (update)
 import View exposing (..)
 
@@ -14,7 +15,7 @@ subscriptions model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( initialModel, Cmd.none )
+    ( initialModel, Repos.onEnter initialModel )
 
 
 main =

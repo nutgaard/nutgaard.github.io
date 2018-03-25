@@ -1,10 +1,10 @@
 module Msg exposing (..)
 
+import Http
+import Model exposing (GithubRepo)
+
 
 type Msg
     = Inc
-    | Dec
-    | Reset
-    | Roll
-    | RollResult Int
-    | Change String
+    | ChangeTab Int (Cmd Msg)
+    | NewExtra (Result Http.Error (List GithubRepo))

@@ -1,5 +1,6 @@
 module View exposing (..)
 
+import ApplicationMain
 import Footer
 import Header
 import Html exposing (..)
@@ -12,5 +13,6 @@ view : Model -> Html Msg
 view model =
     div [ id "root" ]
         [ Header.view
+        , ApplicationMain.view model
         , Footer.view
         ]

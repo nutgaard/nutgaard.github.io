@@ -2,26 +2,20 @@ module Update exposing (..)
 
 import Model exposing (..)
 import Msg exposing (..)
-import Random
+import Repos
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Inc ->
-            ( { model | count = model.count + 1 }, Cmd.none )
+            ( model, Cmd.none )
 
-        Dec ->
-            ( { model | count = model.count - 1 }, Cmd.none )
+        ChangeTab index cmd ->
+            ( { model | selectedTab = index }, cmd )
 
-        Roll ->
-            ( model, Random.generate RollResult (Random.int 1 6) )
+        NewExtra (Ok repos) ->
+            ( { model | repos = Repos.sortRepos repos }, Cmd.none )
 
-        RollResult value ->
-            ( { model | count = value }, Cmd.none )
-
-        Reset ->
-            ( { model | count = 0, content = "" }, Cmd.none )
-
-        Change newContent ->
-            ( { model | content = newContent }, Cmd.none )
+        NewExtra (Err err) ->
+            ( model, Cmd.none )
