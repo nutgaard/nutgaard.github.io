@@ -1,7 +1,8 @@
 module Msg exposing (..)
 
-type Msg =
-    Inc
+
+type Msg
+    = Inc
     | Dec
     | Reset
     | Roll
