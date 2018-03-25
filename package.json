@@ -1,0 +1,15 @@
+{
+  "name": "nutgaard.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:nutgaard/nutgaard.github.io.git",
+  "author": "Nicklas Utgaard <nicklas.utgaard@bekk.no>",
+  "license": "MIT",
+  "scripts": {
+    "start": "elm-live Main.elm --output=elm.js --open"
+  },
+  "dependencies": {
+    "elm": "^0.18.0",
+    "elm-live": "^2.7.5"
+  }
+}
