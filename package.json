@@ -6,10 +6,20 @@
   "author": "Nicklas Utgaard <nicklas.utgaard@bekk.no>",
   "license": "MIT",
   "scripts": {
-    "start": "elm-live Main.elm --output=elm.js --open"
+    "start": "elm-live Main.elm --output=elm.js --open",
+    "build:css": "postcss style.css > build/style.css",
+    "build:html": "html-minifier --collapse-whitespace -o build/index.html index.html",
+    "build:elm": "elm-make Main.elm --output=build/elm.js && uglifyjs build/elm.js -o build/elm.js -c -m",
+    "build": "npm run build:elm && npm run build:html && npm run build:css",
+    "publish": "npm run build && gh-pages -d build -b master"
   },
-  "dependencies": {
+  "devDependencies": {
+    "cssnano": "^3.10.0",
     "elm": "^0.18.0",
-    "elm-live": "^2.7.5"
+    "elm-live": "^2.7.5",
+    "gh-pages": "^1.1.0",
+    "html-minifier": "^3.5.12",
+    "postcss-cli": "^5.0.0",
+    "uglify-js": "^3.3.16"
   }
 }
