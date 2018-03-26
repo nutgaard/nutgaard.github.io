@@ -3,9 +3,11 @@ module Repos exposing (..)
 import Date
 import Date.Extra.Compare exposing (Compare2(After))
 import Html exposing (..)
+import Html.Attributes exposing (class)
 import Http
 import Json.Decode exposing (Decoder, bool, int, string)
 import Json.Decode.Pipeline exposing (decode, optional, required)
+import Loader
 import Model exposing (GithubRepo, Model)
 import Msg exposing (Msg(NewExtra))
 import RepoView
@@ -33,23 +35,22 @@ repoComparator a b =
         bPages =
             b.has_pages
     in
-    if aPages == bPages then
-        if Date.Extra.Compare.is After aDate bDate then
+        if aPages == bPages then
+            if Date.Extra.Compare.is After aDate bDate then
+                LT
+            else
+                GT
+        else if aPages then
             LT
         else
             GT
-    else if aPages then
-        LT
-    else
-        GT
 
 
 onEnter : Model -> Cmd Msg
 onEnter model =
-    if List.length model.repos == 0 then
-        Http.send NewExtra (Http.get "https://api.github.com/users/nutgaard/repos?per_page=100" responseDecoder)
-    else
-        Cmd.none
+    case model.repos of
+        Nothing -> Http.send NewExtra (Http.get "https://api.github.com/users/nutgaard/repos?per_page=100" responseDecoder)
+        Just repos -> Cmd.none
 
 
 responseDecoder : Decoder (List GithubRepo)
@@ -73,8 +74,9 @@ repoDecoder =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ h1 [] [ text "Repos" ]
-        , Statistics.view model
-        , RepoView.view model
-        ]
+    let
+        children = case model.repos of
+            Nothing -> [ Loader.view ]
+            Just repos -> [ Statistics.view repos, RepoView.view repos ]
+    in
+    div [ class "github" ] children

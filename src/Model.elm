@@ -1,5 +1,7 @@
 module Model exposing (..)
 
+import Menu
+
 
 type alias GithubRepo =
     { has_pages : Bool
@@ -16,12 +18,14 @@ type alias GithubRepo =
 
 type alias Model =
     { selectedTab : Int
-    , repos : List GithubRepo
+    , repos : Maybe (List GithubRepo)
+    , menu: Menu.Model
     }
 
 
 initialModel : Model
 initialModel =
     { selectedTab = 0
-    , repos = []
+    , repos = Maybe.Nothing
+    , menu = Menu.initialModel
     }

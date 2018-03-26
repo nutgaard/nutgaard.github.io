@@ -1,6 +1,8 @@
 module Statistics exposing (..)
 
 import Array
+import Dict
+import Grid
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Model exposing (GithubRepo, Model)
@@ -47,64 +49,67 @@ getMaxBySomething repos maxByExtract txt =
                 Just repo ->
                     maxByExtract repo
     in
-    p []
-        [ b [] [ text txt ]
-        , text (name ++ "(" ++ toString count ++ ")")
-        ]
+        p []
+            [ b [] [ text txt ]
+            , text (name ++ " (" ++ toString count ++ ")")
+            ]
 
 
-nofRepos : Model -> Html msg
-nofRepos model =
+nofRepos : (List GithubRepo) -> Html msg
+nofRepos repos =
     p []
         [ b [] [ text "Number of repositories: " ]
-        , text (toString (List.length model.repos))
+        , text (toString (List.length repos))
         ]
 
 
-lastUpdated : Model -> Html msg
-lastUpdated model =
+lastUpdated : (List GithubRepo) -> Html msg
+lastUpdated repos =
     let
         lastUpdatedRepo =
-            case Array.get 0 (Array.fromList model.repos) of
+            case Array.get 0 (Array.fromList repos) of
                 Nothing ->
                     "Found no updated repos"
 
                 Just repo ->
                     repo.name
     in
-    p []
-        [ b [] [ text "Latest update: " ]
-        , text lastUpdatedRepo
-        ]
+        p []
+            [ b [] [ text "Latest update: " ]
+            , text lastUpdatedRepo
+            ]
 
 
-mostWatchers : Model -> Html msg
-mostWatchers model =
-    getMaxBySomething model.repos (\repo -> repo.watchers_count) "Most watchers: "
+mostWatchers : (List GithubRepo) -> Html msg
+mostWatchers repos =
+    getMaxBySomething repos (\repo -> repo.watchers_count) "Most watchers: "
 
 
-mostForks : Model -> Html msg
-mostForks model =
-    getMaxBySomething (List.filter (\repo -> not repo.fork) model.repos) (\repo -> repo.forks_count) "Most forked: "
+mostForks : (List GithubRepo) -> Html msg
+mostForks repos =
+    getMaxBySomething (List.filter (\repo -> not repo.fork) repos) (\repo -> repo.forks_count) "Most forked: "
 
 
-mostIssues : Model -> Html msg
-mostIssues model =
-    getMaxBySomething model.repos (\repo -> repo.open_issues_count) "Most open issues: "
+mostIssues : (List GithubRepo) -> Html msg
+mostIssues repos =
+    getMaxBySomething repos (\repo -> repo.open_issues_count) "Most open issues: "
 
 
-mostStars : Model -> Html msg
-mostStars model =
-    getMaxBySomething model.repos (\repo -> repo.stargazers_count) "Most stars: "
+mostStars : (List GithubRepo) -> Html msg
+mostStars repos =
+    getMaxBySomething repos (\repo -> repo.stargazers_count) "Most stars: "
 
 
-view : Model -> Html msg
-view model =
-    div [ class "grid github__statistics grid--small-1 grid--medium-2 grid--large-3" ]
-        [ nofRepos model
-        , lastUpdated model
-        , mostWatchers model
-        , mostForks model
-        , mostIssues model
-        , mostStars model
-        ]
+gridConfig : Grid.Config -> Grid.Config
+gridConfig config = { config | class = Maybe.Just "github__statistics" }
+
+view : (List GithubRepo) -> Html Msg
+view repos =
+    Grid.view gridConfig [ nofRepos repos
+                                       , lastUpdated repos
+                                       , mostWatchers repos
+                                       , mostForks repos
+                                       , mostIssues repos
+                                       , mostStars repos
+                                       ]
+

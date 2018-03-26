@@ -25,7 +25,7 @@ toTab selected index tabConfig =
             else
                 "tabs__tabbutton"
     in
-    button [ class className, onClick (ChangeTab index tabConfig.onEnter) ] [ h2 [] [ text tabConfig.name ] ]
+        button [ class className, onClick (ChangeTab index tabConfig.onEnter) ] [ h2 [] [ text tabConfig.name ] ]
 
 
 getContent : Model -> List TabConfig -> Html Msg

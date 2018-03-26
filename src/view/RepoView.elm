@@ -1,7 +1,10 @@
 module RepoView exposing (..)
 
+import Dict
+import Grid
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Loader
 import Model exposing (GithubRepo, Model)
 import Msg exposing (Msg(NewExtra))
 import Task
@@ -15,15 +18,30 @@ onEnter =
 
 single : GithubRepo -> Html Msg
 single repo =
-    div [ class "github__repo" ]
-        [ h3 [] [ text repo.name ]
-        , p [] [ text (toString repo.has_pages ++ " " ++ repo.pushed_at) ]
+    let
+        tag =
+            if repo.has_pages then
+                a
+            else
+                div
 
-        --    , p [] [ text (repo.description |> Maybe.withDefault "") ]
-        ]
+        properties =
+            if repo.has_pages then
+                [ class "github__repo github__repo--haspages"
+                , href ("//www.utgaard.xyz/" ++ repo.name ++ "/")
+                ]
+            else
+                [ class "github__repo"
+                ]
+    in
+        tag properties
+            [ h3 [] [ text repo.name ]
+            , p [] [ text (repo.description |> Maybe.withDefault "") ]
+            ]
+
+gridConfig : Grid.Config -> Grid.Config
+gridConfig config = { config | padElement = div [ class "github__emptyrepo" ] []}
 
 
-view : Model -> Html Msg
-view model =
-    div [ class "grid github__repos grid--small-1 grid--medium-2 grid--large-3" ]
-        (List.map single model.repos)
+view : (List GithubRepo) -> Html Msg
+view repos = Grid.view gridConfig (List.map single repos)

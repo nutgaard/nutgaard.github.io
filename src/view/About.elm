@@ -9,8 +9,7 @@ import Task
 
 onEnter : Cmd Msg
 onEnter =
-    Task.succeed (NewExtra (Result.Ok []))
-        |> Task.perform identity
+    Cmd.none
 
 
 view : Model -> Html Msg
