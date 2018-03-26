@@ -10,10 +10,12 @@
     "build:css": "postcss style.css > build/style.css",
     "build:html": "html-minifier --collapse-whitespace -o build/index.html index.html",
     "build:elm": "elm-make Main.elm --output=build/elm.js && uglifyjs build/elm.js -o build/elm.js -c -m",
-    "build": "npm run build:elm && npm run build:html && npm run build:css",
+    "build:static": "copyfiles -u 1 static/* build",
+    "build": "npm run build:elm && npm run build:static && npm run build:html && npm run build:css",
     "publish": "npm run build && gh-pages -d build -b master"
   },
   "devDependencies": {
+    "copyfiles": "^2.0.0",
     "cssnano": "^3.10.0",
     "elm": "^0.18.0",
     "elm-live": "^2.7.5",
