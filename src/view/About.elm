@@ -7,8 +7,8 @@ import Msg exposing (Msg(NewExtra))
 import Task
 
 
-onEnter : Cmd Msg
-onEnter =
+onEnter : Model -> Cmd Msg
+onEnter model =
     Cmd.none
 
 

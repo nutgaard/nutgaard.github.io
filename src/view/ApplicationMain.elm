@@ -30,9 +30,9 @@ pages = repoView PagesView.view
 
 tabConfig : Model -> Tabs.TabsConfig
 tabConfig model =
-    [ { name = "Github pages", content = pages, onEnter = Repos.onEnter model }
-    , { name = "Github repos", content = repos, onEnter = Repos.onEnter model }
-    , { name = "About", content = About.view, onEnter = About.onEnter }
+    [ { name = "Github pages", content = pages, onEnter = Repos.onEnter, hash = "#!pages" }
+    , { name = "Github repos", content = repos, onEnter = Repos.onEnter, hash = "#!repos" }
+    , { name = "About", content = About.view, onEnter = About.onEnter, hash = "#!about" }
     ]
 
 

@@ -1,7 +1,7 @@
 module Model exposing (..)
 
 import Menu
-
+import Navigation
 
 type alias GithubRepo =
     { has_pages : Bool
@@ -17,15 +17,15 @@ type alias GithubRepo =
 
 
 type alias Model =
-    { selectedTab : Int
+    { locationHash : String
     , repos : Maybe (List GithubRepo)
     , menu: Menu.Model
     }
 
 
-initialModel : Model
-initialModel =
-    { selectedTab = 0
+initialModel : Navigation.Location -> Model
+initialModel location =
+    { locationHash = location.hash
     , repos = Maybe.Nothing
     , menu = Menu.initialModel
     }
