@@ -1,16 +1,21 @@
 module Update exposing (..)
 
+import ApplicationMain exposing (tabConfig)
 import Menu
 import Model exposing (..)
 import Msg exposing (..)
 import Navigation
 import Repos
 
-
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        UrlChange location -> ({ model | locationHash = location.hash }, Cmd.none)
+        UrlChange location ->
+           if List.member location.hash (List.map (\tab -> tab.hash) tabConfig)
+               then
+                   ({ model | locationHash = location.hash }, Cmd.none)
+               else
+                   (model, Navigation.newUrl "#!pages")
 
         TabClick tabConfig ->
             (model, Cmd.batch [ Navigation.newUrl tabConfig.hash, tabConfig.onEnter model ])

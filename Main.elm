@@ -1,5 +1,6 @@
 module Main exposing (..)
 
+import ApplicationMain exposing (tabConfig)
 import Html exposing (..)
 import Model exposing (Model, initialModel)
 import Msg exposing (Msg(UrlChange))
@@ -18,7 +19,8 @@ init : Navigation.Location -> ( Model, Cmd Msg )
 init location =
     let
         model = initialModel location
-        extraCmd = if String.length location.hash > 0
+        acceptedTabHashes = List.map (\tab -> tab.hash) tabConfig
+        extraCmd = if List.member location.hash acceptedTabHashes
             then
                 Cmd.none
             else

@@ -28,8 +28,8 @@ repos = repoView RepoView.view
 pages : Model -> Html Msg
 pages = repoView PagesView.view
 
-tabConfig : Model -> Tabs.TabsConfig
-tabConfig model =
+tabConfig : Tabs.TabsConfig
+tabConfig =
     [ { name = "Github pages", content = pages, onEnter = Repos.onEnter, hash = "#!pages" }
     , { name = "Github repos", content = repos, onEnter = Repos.onEnter, hash = "#!repos" }
     , { name = "About", content = About.view, onEnter = About.onEnter, hash = "#!about" }
@@ -39,4 +39,4 @@ tabConfig model =
 view : Model -> Html Msg
 view model =
     Html.main_ [ class "application__main" ]
-        [ Tabs.view model (tabConfig model) ]
+        [ Tabs.view model tabConfig ]
