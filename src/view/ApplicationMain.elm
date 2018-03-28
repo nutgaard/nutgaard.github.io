@@ -4,16 +4,34 @@ import About
 import Array
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Model exposing (Model)
+import Loader
+import Model exposing (GithubRepo, Model)
 import Msg exposing (Msg)
+import PagesView
+import RepoView
 import Repos
+import Statistics
 import Tabs
 
+repoView : (List GithubRepo -> List(Html Msg)) -> Model -> Html Msg
+repoView subview model =
+    let
+        children = case model.repos of
+            Nothing -> [ Loader.view ]
+            Just repos -> subview repos
+    in
+        div [ class "github" ] children
+
+repos : Model -> Html Msg
+repos = repoView RepoView.view
+
+pages : Model -> Html Msg
+pages = repoView PagesView.view
 
 tabConfig : Model -> Tabs.TabsConfig
 tabConfig model =
-    [ { name = "Github repos", content = Repos.view, onEnter = Repos.onEnter model }
-    , { name = "Github pages", content = Repos.view, onEnter = Repos.onEnter model }
+    [ { name = "Github pages", content = pages, onEnter = Repos.onEnter model }
+    , { name = "Github repos", content = repos, onEnter = Repos.onEnter model }
     , { name = "About", content = About.view, onEnter = About.onEnter }
     ]
 

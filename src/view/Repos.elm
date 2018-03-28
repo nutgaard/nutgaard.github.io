@@ -70,13 +70,3 @@ repoDecoder =
         |> required "open_issues_count" int
         |> required "stargazers_count" int
         |> required "pushed_at" string
-
-
-view : Model -> Html Msg
-view model =
-    let
-        children = case model.repos of
-            Nothing -> [ Loader.view ]
-            Just repos -> [ Statistics.view repos, RepoView.view repos ]
-    in
-    div [ class "github" ] children

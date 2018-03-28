@@ -1,4 +1,4 @@
-module RepoView exposing (..)
+module PagesView exposing (..)
 
 import Dict
 import Grid
@@ -10,9 +10,12 @@ import Msg exposing (Msg(NewExtra))
 import Statistics
 import Task
 
+hasPages : GithubRepo -> Bool
+hasPages repo = repo.has_pages
+
 single : GithubRepo -> Html Msg
 single repo =
-    a [ class "github__repo github__repo--haspages", href ("//www.github.com/nutgaard/" ++ repo.name ++ "/") ]
+    a [ class "github__repo github__repo--haspages", href ("//www.utgaard.xyz/" ++ repo.name ++ "/") ]
         [ h3 [] [ text repo.name ]
         , p [] [ text (repo.description |> Maybe.withDefault "") ]
         ]
@@ -22,4 +25,8 @@ gridConfig config = { config | padElement = div [ class "github__emptyrepo" ] []
 
 
 view : (List GithubRepo) -> List (Html Msg)
-view repos = [ Statistics.view repos, Grid.view gridConfig (List.map single repos) ]
+view repos =
+    let
+        filteredRepos = List.filter (\repo -> repo.has_pages) repos
+    in
+        [ Statistics.view filteredRepos, Grid.view gridConfig (List.map single filteredRepos)]
