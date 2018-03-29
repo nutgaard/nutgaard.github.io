@@ -55,7 +55,7 @@ getMaxBySomething repos maxByExtract txt =
             ]
 
 
-nofRepos : (List GithubRepo) -> Html msg
+nofRepos : List GithubRepo -> Html msg
 nofRepos repos =
     p []
         [ b [] [ text "Number of repositories: " ]
@@ -63,7 +63,7 @@ nofRepos repos =
         ]
 
 
-lastUpdated : (List GithubRepo) -> Html msg
+lastUpdated : List GithubRepo -> Html msg
 lastUpdated repos =
     let
         lastUpdatedRepo =
@@ -80,36 +80,38 @@ lastUpdated repos =
             ]
 
 
-mostWatchers : (List GithubRepo) -> Html msg
+mostWatchers : List GithubRepo -> Html msg
 mostWatchers repos =
     getMaxBySomething repos (\repo -> repo.watchers_count) "Most watchers: "
 
 
-mostForks : (List GithubRepo) -> Html msg
+mostForks : List GithubRepo -> Html msg
 mostForks repos =
     getMaxBySomething (List.filter (\repo -> not repo.fork) repos) (\repo -> repo.forks_count) "Most forked: "
 
 
-mostIssues : (List GithubRepo) -> Html msg
+mostIssues : List GithubRepo -> Html msg
 mostIssues repos =
     getMaxBySomething repos (\repo -> repo.open_issues_count) "Most open issues: "
 
 
-mostStars : (List GithubRepo) -> Html msg
+mostStars : List GithubRepo -> Html msg
 mostStars repos =
     getMaxBySomething repos (\repo -> repo.stargazers_count) "Most stars: "
 
 
 gridConfig : Grid.Config -> Grid.Config
-gridConfig config = { config | class = Maybe.Just "github__statistics" }
+gridConfig config =
+    { config | class = Maybe.Just "github__statistics" }
 
-view : (List GithubRepo) -> Html Msg
+
+view : List GithubRepo -> Html Msg
 view repos =
-    Grid.view gridConfig [ nofRepos repos
-                                       , lastUpdated repos
-                                       , mostWatchers repos
-                                       , mostForks repos
-                                       , mostIssues repos
-                                       , mostStars repos
-                                       ]
-
+    Grid.view gridConfig
+        [ nofRepos repos
+        , lastUpdated repos
+        , mostWatchers repos
+        , mostForks repos
+        , mostIssues repos
+        , mostStars repos
+        ]

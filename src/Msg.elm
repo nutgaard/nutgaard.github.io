@@ -6,6 +6,7 @@ import Menu
 import Model exposing (GithubRepo, Model)
 import Navigation
 
+
 type alias TabConfig =
     { name : String
     , content : Model -> Html Msg

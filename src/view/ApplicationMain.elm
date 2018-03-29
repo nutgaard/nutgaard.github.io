@@ -13,20 +13,30 @@ import Repos
 import Statistics
 import Tabs
 
-repoView : (List GithubRepo -> List(Html Msg)) -> Model -> Html Msg
+
+repoView : (List GithubRepo -> List (Html Msg)) -> Model -> Html Msg
 repoView subview model =
     let
-        children = case model.repos of
-            Nothing -> [ Loader.view ]
-            Just repos -> subview repos
+        children =
+            case model.repos of
+                Nothing ->
+                    [ Loader.view ]
+
+                Just repos ->
+                    subview repos
     in
         div [ class "github" ] children
 
+
 repos : Model -> Html Msg
-repos = repoView RepoView.view
+repos =
+    repoView RepoView.view
+
 
 pages : Model -> Html Msg
-pages = repoView PagesView.view
+pages =
+    repoView PagesView.view
+
 
 tabConfig : Tabs.TabsConfig
 tabConfig =

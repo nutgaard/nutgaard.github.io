@@ -49,8 +49,11 @@ repoComparator a b =
 onEnter : Model -> Cmd Msg
 onEnter model =
     case model.repos of
-        Nothing -> Http.send NewExtra (Http.get "https://api.github.com/users/nutgaard/repos?per_page=100" responseDecoder)
-        Just repos -> Cmd.none
+        Nothing ->
+            Http.send NewExtra (Http.get "https://api.github.com/users/nutgaard/repos?per_page=100" responseDecoder)
+
+        Just repos ->
+            Cmd.none
 
 
 responseDecoder : Decoder (List GithubRepo)

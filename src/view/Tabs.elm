@@ -8,6 +8,7 @@ import Model exposing (Model)
 import Msg exposing (..)
 import Navigation
 
+
 type alias TabsConfig =
     List TabConfig
 
@@ -27,12 +28,19 @@ toTab model tabConfig =
 getContent : Model -> List TabConfig -> Html Msg
 getContent model contentList =
     let
-        selected = List.head (List.filter (\tc -> tc.hash == model.locationHash) contentList)
-        markup = case selected of
-            Nothing -> Html.div [] [ text "Could not find page" ]
-            Just config -> div [ class "tabs__content" ] [ config.content model ]
+        selected =
+            List.head (List.filter (\tc -> tc.hash == model.locationHash) contentList)
+
+        markup =
+            case selected of
+                Nothing ->
+                    Html.div [] [ text "Could not find page" ]
+
+                Just config ->
+                    div [ class "tabs__content" ] [ config.content model ]
     in
         markup
+
 
 view : Model -> TabsConfig -> Html Msg
 view model tabConfig =

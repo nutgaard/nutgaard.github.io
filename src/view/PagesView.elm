@@ -10,8 +10,11 @@ import Msg exposing (Msg(NewExtra))
 import Statistics
 import Task
 
+
 hasPages : GithubRepo -> Bool
-hasPages repo = repo.has_pages
+hasPages repo =
+    repo.has_pages
+
 
 single : GithubRepo -> Html Msg
 single repo =
@@ -20,13 +23,16 @@ single repo =
         , p [] [ text (repo.description |> Maybe.withDefault "") ]
         ]
 
+
 gridConfig : Grid.Config -> Grid.Config
-gridConfig config = { config | padElement = div [ class "github__emptyrepo" ] []}
+gridConfig config =
+    { config | padElement = div [ class "github__emptyrepo" ] [] }
 
 
-view : (List GithubRepo) -> List (Html Msg)
+view : List GithubRepo -> List (Html Msg)
 view repos =
     let
-        filteredRepos = List.filter (\repo -> repo.has_pages) repos
+        filteredRepos =
+            List.filter (\repo -> repo.has_pages) repos
     in
-        [ Statistics.view filteredRepos, Grid.view gridConfig (List.map single filteredRepos)]
+        [ Statistics.view filteredRepos, Grid.view gridConfig (List.map single filteredRepos) ]

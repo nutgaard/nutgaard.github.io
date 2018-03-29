@@ -57,14 +57,16 @@ update msg model =
 clipper : Model -> Int -> String -> Html Msg
 clipper model id txt =
     let
-        hasHover = (model.hover |> Maybe.withDefault -1) == id
-        hasFocus = (model.focus |> Maybe.withDefault -1) == id
+        hasHover =
+            (model.hover |> Maybe.withDefault -1) == id
 
-        clip = if hasHover
-            then
+        hasFocus =
+            (model.focus |> Maybe.withDefault -1) == id
+
+        clip =
+            if hasHover then
                 hoverClipPath
-            else if hasFocus
-            then
+            else if hasFocus then
                 focusClipPath
             else
                 clipPath

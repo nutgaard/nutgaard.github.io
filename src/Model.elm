@@ -3,6 +3,7 @@ module Model exposing (..)
 import Menu
 import Navigation
 
+
 type alias GithubRepo =
     { has_pages : Bool
     , name : String
@@ -19,7 +20,7 @@ type alias GithubRepo =
 type alias Model =
     { locationHash : String
     , repos : Maybe (List GithubRepo)
-    , menu: Menu.Model
+    , menu : Menu.Model
     }
 
 

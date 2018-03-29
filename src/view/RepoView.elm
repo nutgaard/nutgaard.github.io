@@ -10,6 +10,7 @@ import Msg exposing (Msg(NewExtra))
 import Statistics
 import Task
 
+
 single : GithubRepo -> Html Msg
 single repo =
     a [ class "github__repo github__repo--haspages", href ("//www.github.com/nutgaard/" ++ repo.name ++ "/") ]
@@ -17,9 +18,12 @@ single repo =
         , p [] [ text (repo.description |> Maybe.withDefault "") ]
         ]
 
+
 gridConfig : Grid.Config -> Grid.Config
-gridConfig config = { config | padElement = div [ class "github__emptyrepo" ] []}
+gridConfig config =
+    { config | padElement = div [ class "github__emptyrepo" ] [] }
 
 
-view : (List GithubRepo) -> List (Html Msg)
-view repos = [ Statistics.view repos, Grid.view gridConfig (List.map single repos) ]
+view : List GithubRepo -> List (Html Msg)
+view repos =
+    [ Statistics.view repos, Grid.view gridConfig (List.map single repos) ]
