@@ -7,14 +7,16 @@
   "license": "MIT",
   "scripts": {
     "start": "elm-live Main.elm --output=elm.js --open",
+    "inline": "node inline-resources.js build/index.base.html build/index.html",
     "build:css": "postcss style.css > build/style.css",
-    "build:html": "html-minifier --collapse-whitespace -o build/index.html index.html",
+    "build:html": "html-minifier --collapse-whitespace -o build/index.base.html index.html",
     "build:elm": "elm-make Main.elm --output=build/elm.js && uglifyjs build/elm.js -o build/elm.js -c -m",
     "build:static": "copyfiles -u 1 static/* build",
-    "build": "npm run build:elm && npm run build:static && npm run build:html && npm run build:css",
+    "build": "npm run build:elm && npm run build:static && npm run build:html && npm run build:css && npm run inline",
     "publish": "npm run build && gh-pages -d build -b master"
   },
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "copyfiles": "^2.0.0",
     "cssnano": "^3.10.0",
     "elm": "^0.18.0",
