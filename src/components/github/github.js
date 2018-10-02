@@ -1,8 +1,8 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component } from 'react';
 import Grid from './../grid/grid';
 import Async from './../async/async';
 import Softbreak from './../softbreak';
-import './github.css';
+import './github.scss';
 
 function maxBy(list, property) {
     return list.reduce((maxElement, element) => maxElement[property] > element[property] ? maxElement : element, { [property]: -Infinity });

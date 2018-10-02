@@ -1,7 +1,7 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component } from 'react';
+import PT from 'prop-types';
 import classNames from 'classnames';
-
-import './tabs.css';
+import './tabs.scss';
 
 const btnCls = (index, activeIndex) => classNames('tabs__tabbutton', {
     'tabs__tabbutton--isactive': index === activeIndex

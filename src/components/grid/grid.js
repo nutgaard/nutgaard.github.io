@@ -1,7 +1,8 @@
-import React, { PropTypes as PT, cloneElement } from 'react';
+import React, { cloneElement } from 'react';
+import PT from 'prop-types';
 import classNames from 'classnames';
 import matchMedia from './../../utils/match-media';
-import './grid.css';
+import './grid.scss';
 
 export function getSize() {
     // These sizes must be kept insync with grid.scss mediaqueries

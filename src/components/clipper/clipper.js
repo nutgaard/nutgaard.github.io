@@ -1,6 +1,7 @@
-import React, { Component, PropTypes as PT } from 'react';
+import React, { Component } from 'react';
+import PT from 'prop-types';
 import classNames from 'classnames';
-import './clipper.css';
+import './clipper.scss';
 
 const cls = (className) => classNames('clipper', className);
 

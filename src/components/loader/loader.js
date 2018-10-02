@@ -1,5 +1,5 @@
-import React, { PropTypes as PT } from 'react';
-import './loader.css';
+import React from 'react';
+import './loader.scss';
 
 const open = '{';
 const close = '}';

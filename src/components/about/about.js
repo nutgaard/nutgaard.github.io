@@ -1,5 +1,5 @@
-import React, { PropTypes as PT } from 'react';
-import './about.css';
+import React from 'react';
+import './about.scss';
 
 function About() {
     return (

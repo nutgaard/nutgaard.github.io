@@ -1,4 +1,5 @@
-import React, { createElement, PropTypes as PT } from 'react';
+import { createElement } from 'react';
+import PT from 'prop-types';
 
 function addBreaks(text, rules) {
     return rules.reduce((nText, rule) => rule(nText), text);
