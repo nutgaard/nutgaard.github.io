@@ -20,10 +20,14 @@ update msg model =
         TabClick tabConfig ->
             ( model, Cmd.batch [ Navigation.newUrl tabConfig.hash, tabConfig.onEnter model ] )
 
-        NewExtra (Ok repos) ->
-            ( { model | repos = Maybe.Just (Repos.sortRepos repos) }, Cmd.none )
+        RepositoriesReq (Ok repos) -> let
+          reposDone = if List.length repos == 100 then False else True
+          page = if List.length repos == 100 then model.page + 1 else model.page
+          extraCmd = if List.length repos == 100 then Repos.onEnter ({ model | page = page }) else Cmd.none
+        in
+            ( { model | repos = Repos.mergeRepos model.repos repos, page = page, reposDone = reposDone }, extraCmd )
 
-        NewExtra (Err err) ->
+        RepositoriesReq (Err err) ->
             ( model, Cmd.none )
 
         MenuMsg subMsg ->

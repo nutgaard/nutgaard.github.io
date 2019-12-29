@@ -18,5 +18,5 @@ type alias TabConfig =
 type Msg
     = UrlChange Navigation.Location
     | TabClick TabConfig
-    | NewExtra (Result Http.Error (List GithubRepo))
+    | RepositoriesReq (Result Http.Error (List GithubRepo))
     | MenuMsg Menu.Msg

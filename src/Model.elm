@@ -21,6 +21,8 @@ type alias Model =
     { locationHash : String
     , repos : Maybe (List GithubRepo)
     , menu : Menu.Model
+    , page : Int
+    , reposDone: Bool
     }
 
 
@@ -29,4 +31,6 @@ initialModel location =
     { locationHash = location.hash
     , repos = Maybe.Nothing
     , menu = Menu.initialModel
+    , page = 1
+    , reposDone = False
     }

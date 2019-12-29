@@ -24,6 +24,10 @@
     "gh-pages": "^1.1.0",
     "html-minifier": "^3.5.12",
     "postcss-cli": "^5.0.0",
-    "uglify-js": "^3.3.16"
+    "uglify-js": "^3.3.16",
+    "upath": "^1.2.0"
+  },
+  "resolutions": {
+    "upath": "1.2.0"
   }
 }

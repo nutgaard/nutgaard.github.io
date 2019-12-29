@@ -1,6 +1,7 @@
 module Repos exposing (..)
 
 import Date
+import Debug
 import Date.Extra.Compare exposing (Compare2(After))
 import Html exposing (..)
 import Html.Attributes exposing (class)
@@ -9,7 +10,7 @@ import Json.Decode exposing (Decoder, bool, int, string)
 import Json.Decode.Pipeline exposing (decode, optional, required)
 import Loader
 import Model exposing (GithubRepo, Model)
-import Msg exposing (Msg(NewExtra))
+import Msg exposing (Msg(RepositoriesReq))
 import RepoView
 import Statistics
 import Task
@@ -18,6 +19,13 @@ import Task
 sortRepos : List GithubRepo -> List GithubRepo
 sortRepos repos =
     List.sortWith repoComparator repos
+
+mergeRepos : Maybe (List GithubRepo) -> List GithubRepo -> Maybe (List GithubRepo)
+mergeRepos maybeExisting newRepos =
+    case maybeExisting of
+        Nothing -> Maybe.Just (sortRepos newRepos)
+        Just existing -> Maybe.Just (sortRepos (List.append existing newRepos))
+
 
 
 repoComparator : GithubRepo -> GithubRepo -> Order
@@ -48,13 +56,15 @@ repoComparator a b =
 
 onEnter : Model -> Cmd Msg
 onEnter model =
-    case model.repos of
-        Nothing ->
-            Http.send NewExtra (Http.get "https://api.github.com/users/nutgaard/repos?per_page=100" responseDecoder)
-
-        Just repos ->
+    let
+        baseurl = "https://api.github.com/users/nutgaard/repos?per_page=100&page="
+        page = toString model.page
+        requestUrl = String.append baseurl page
+    in
+        if not model.reposDone then
+            Http.send RepositoriesReq (Http.get requestUrl responseDecoder)
+        else
             Cmd.none
-
 
 responseDecoder : Decoder (List GithubRepo)
 responseDecoder =

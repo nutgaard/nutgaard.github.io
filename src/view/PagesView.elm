@@ -6,7 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Loader
 import Model exposing (GithubRepo, Model)
-import Msg exposing (Msg(NewExtra))
+import Msg exposing (Msg(RepositoriesReq))
 import Statistics
 import Task
 

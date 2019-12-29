@@ -3,7 +3,7 @@ module About exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Model exposing (Model)
-import Msg exposing (Msg(NewExtra))
+import Msg exposing (Msg(RepositoriesReq))
 import Task
 
 
