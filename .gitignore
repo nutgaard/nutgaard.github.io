@@ -20,3 +20,5 @@ src/**/*.css
 .idea
 elm-stuff
 elm.js
+
+.cache/

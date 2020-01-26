@@ -3,31 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:nutgaard/nutgaard.github.io.git",
-  "author": "Nicklas Utgaard <nicklas.utgaard@bekk.no>",
+  "author": "Nicklas Utgaard",
   "license": "MIT",
   "scripts": {
-    "start": "elm-live Main.elm --output=elm.js --open",
-    "inline": "node inline-resources.js build/index.base.html build/index.html",
-    "build:css": "postcss style.css > build/style.css",
-    "build:html": "html-minifier --collapse-whitespace -o build/index.base.html index.html",
-    "build:elm": "elm-make Main.elm --output=build/elm.js && uglifyjs build/elm.js -o build/elm.js -c -m",
+    "start": "parcel src/index.html --out-dir build",
+    "test": "ts-node src/statistics.ts",
+    "build:inline": "node inline-resources.js build/index.html build/index.html",
+    "build:app": "parcel build src/index.html --out-dir build",
     "build:static": "copyfiles -u 1 static/* build",
-    "build": "npm run build:elm && npm run build:static && npm run build:html && npm run build:css && npm run inline",
+    "build": "npm run build:app && npm run build:static && npm run build:inline",
     "publish": "npm run build && gh-pages -d build -b master"
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.2",
     "copyfiles": "^2.0.0",
-    "cssnano": "^3.10.0",
-    "elm": "^0.18.0",
-    "elm-live": "^2.7.5",
     "gh-pages": "^1.1.0",
-    "html-minifier": "^3.5.12",
-    "postcss-cli": "^5.0.0",
-    "uglify-js": "^3.3.16",
-    "upath": "^1.2.0"
-  },
-  "resolutions": {
-    "upath": "1.2.0"
+    "parcel-bundler": "^1.12.4",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
   }
 }
