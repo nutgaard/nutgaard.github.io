@@ -5,7 +5,6 @@ import { withLoader } from './loader';
 import githubpages from './githubpages';
 import githubrepos from './githubrepos';
 import about from './about';
-import menu from './menu';
 
 const data: Promise<Array<GithubRepo>> = fetchRepos();
 const tabConfig: Array<TabConfig> = [
@@ -25,7 +24,6 @@ function app() {
             <header class="header dark">
                 <h1>Utgaard</h1>
             </header>
-            ${menu()}
             <main class="application__main">
                 <div class="tabs">
                     ${tabs(tabConfig)}

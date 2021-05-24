@@ -11,7 +11,17 @@ function repolink(repo: GithubRepo) {
 }
 
 export default function githubrepos(repos: Array<GithubRepo>) {
-    const repolinks = repos.map(repolink).join('\n');
+    const minRows = Math.ceil(repos.length / 3)
+    const padSize = (minRows * 3) - repos.length;
+    const padding = new Array(padSize)
+        .fill(0)
+        .map(() => `<div class="github__emptyrepo"></div>`);
+
+    const repolinks = repos
+        .map(repolink)
+        .concat(padding)
+        .join('\n');
+
     return `
         <div class="github">
             ${statistics(repos)}

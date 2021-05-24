@@ -12,7 +12,17 @@ function pagelink(repo: GithubRepo) {
 
 export default function githubpages(repos: Array<GithubRepo>) {
     const reposWithPages = repos.filter(({ has_pages }) => has_pages);
-    const pagelinks = reposWithPages.map(pagelink).join('\n');
+
+    const minRows = Math.ceil(reposWithPages.length / 3)
+    const padSize = (minRows * 3) - reposWithPages.length;
+    const padding = new Array(padSize)
+        .fill(0)
+        .map(() => `<div class="github__emptyrepo"></div>`);
+
+    const pagelinks = reposWithPages
+        .map(pagelink)
+        .concat(padding)
+        .join('\n');
 
     return `
         <div class="github">
