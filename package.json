@@ -6,7 +6,7 @@
   "author": "Nicklas Utgaard",
   "license": "MIT",
   "scripts": {
-    "start": "parcel src/index.html --out-dir build",
+    "start": "DEV=true parcel src/index.html --out-dir build",
     "test": "ts-node src/statistics.ts",
     "build:inline": "node inline-resources.js build/index.html build/index.html",
     "build:app": "parcel build src/index.html --out-dir build",
@@ -20,6 +20,10 @@
     "gh-pages": "^1.1.0",
     "parcel-bundler": "^1.12.4",
     "ts-node": "^8.5.4",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "yet-another-fetch-mock": "^4.1.0"
+  },
+  "dependencies": {
+    "src": "^1.1.2"
   }
 }

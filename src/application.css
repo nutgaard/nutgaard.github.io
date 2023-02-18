@@ -1,0 +1,61 @@
+body {
+    overflow: hidden;
+}
+#root,.application {
+    height: 100vh;
+    width: 100vw;
+}
+.application {
+    display: grid;
+    grid-template-areas: "_ header" "_ links" "_ content";
+    grid-template-rows: min-content min-content 1fr;
+    grid-template-columns: 5.75rem 1fr;
+}
+.header {
+    grid-area: header;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+.tabs {
+    grid-area: links;
+    margin-bottom: 1rem;
+}
+.tabs__content {
+    grid-area: content;
+    overflow: hidden;
+    height: 100%;
+    padding-bottom: 0.5rem;
+}
+.github {
+    overflow: scroll;
+    height: 100%;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+}
+
+.github > .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+}
+
+.github__repo {
+    display: block;
+    border: 1px solid var(--highlight3);
+    border-radius: 4px;
+    color: var(--color);
+    padding: 0.5rem 0.875rem;
+    text-decoration: none;
+}
+.github__repo h3 {
+    border-bottom: solid 1px var(--color);
+    margin-bottom: 6px;
+    display: inline-block;
+}
+.github__repo:hover {
+    /* background-color: var(--highlight3);*/
+    box-shadow: 0 0 5px 3px var(--highlight3);
+}
+.github__repo:hover h3 {
+    border-color: var(--highlight3);
+}

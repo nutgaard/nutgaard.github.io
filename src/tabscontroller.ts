@@ -8,14 +8,14 @@ const notFoundPage : TabConfig = {
     href: '#!pages', description: "Not Found - 404", content: () => "Page not found"
 };
 
-export default function tabs(tabConfig: Array<TabConfig>) {
+export default function tabs(tabConfig: Array<TabConfig>): [string, string] {
     const tabsHtml = tabConfig
         .map((tab) => {
             const isActive = window.location.hash === tab.href;
             const className = ['tabs__tabbutton', isActive ? 'tabs__tabbutton--isactive' : ''].join(' ').trim();
             return `
             <a class="${className}" href="${tab.href}">
-                <h2>${tab.description}</h2>
+                ${tab.description}
             </a>
         `
         });
@@ -24,12 +24,11 @@ export default function tabs(tabConfig: Array<TabConfig>) {
         || notFoundPage;
 
     return [
-        ...tabsHtml,
-        `
-        <div class="tabs__content">
+        `<nav class="tabs">
+            ${tabsHtml.join('')}
+        </nav>`,
+        `<main class="tabs__content">
             ${activeTab.content()}
-        </div>
-        `
-    ]
-        .join('');
+        </main>`
+    ];
 }

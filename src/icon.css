@@ -1,0 +1,8 @@
+.icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.icon > rect {
+    fill: var(--color);
+}

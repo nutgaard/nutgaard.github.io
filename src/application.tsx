@@ -5,6 +5,13 @@ import { withLoader } from './loader';
 import githubpages from './githubpages';
 import githubrepos from './githubrepos';
 import about from './about';
+import {icon} from "./icon";
+import gameOfLife from "./game-of-life";
+
+if (process.env.DEV) {
+    console.log("Is dev mode...")
+    require('./mock');
+}
 
 const data: Promise<Array<GithubRepo>> = fetchRepos();
 const tabConfig: Array<TabConfig> = [
@@ -19,21 +26,24 @@ if (!validTabConfig) {
 }
 
 function app() {
+    const [tabLinks, tabContent] = tabs(tabConfig);
     return `
-        <div class="application">
-            <header class="header dark">
-                <h1>Utgaard</h1>
-            </header>
-            <main class="application__main">
-                <div class="tabs">
-                    ${tabs(tabConfig)}
-                </div>
-            </main>
-            <footer class="footer dark">
-                <h1>Utgaard</h1>
-            </footer>
-        </div>
+        ${gameOfLife()}
+        <h1 style="color: #0C0E14">Utgaard</h1>
     `;
+    // return `
+    //     <div class="application">
+    //         <header class="header">
+    //             ${icon()}
+    //             <h1>
+    //                 <span class="sr-only">U</span>
+    //                 <span>tgaard</span>
+    //             </h1>
+    //         </header>
+    //         ${tabLinks}
+    //         ${tabContent}
+    //     </div>
+    // `;
 }
 
 framework.start(app, document.getElementById('root'));
