@@ -1,0 +1,41 @@
+.application {
+    height: 100%;
+    display: grid;
+    grid-template-areas: "header" "main" "footer";
+    grid-template-rows: min-content 1fr min-content;
+}
+
+.header {
+    grid-area: header;
+}
+
+.footer {
+    grid-area: footer;
+}
+.header, .footer {
+    padding: 1rem 1.5rem;
+    background: var(--foreground);
+    color: var(--background);
+}
+
+.main {
+    grid-area: main;
+    padding: 1rem 1.5rem;
+}
+
+.menu {
+    list-style: none;
+    margin-bottom: 1rem;
+
+    > li {
+        display: inline;
+        font-size: 1.5rem;
+
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
+    }
+}
+.content {
+
+}
