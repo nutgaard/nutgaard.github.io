@@ -9,6 +9,7 @@ type Props = {
 type EntryProps = PropsWithChildren<{
     heading: string;
 }>;
+
 function Entry(props: EntryProps) {
     return (
         <div>
@@ -17,6 +18,7 @@ function Entry(props: EntryProps) {
         </div>
     )
 }
+
 export function GithubStatistics(props: Props) {
     const statistics = props.statistics;
     return (

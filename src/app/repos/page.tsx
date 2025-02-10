@@ -1,3 +1,5 @@
+import 'server-only';
+
 import {fetchRepos} from "@/resources/github";
 import githubStatistics from "@/utils/github_statistics";
 import {GithubStatistics} from "@/components/GithubStatistics";

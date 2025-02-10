@@ -1,5 +1,9 @@
-const defaultHeaders: RequestInit = {
+import 'server-only';
 
+const defaultHeaders: RequestInit = {
+    headers: {
+        'content-type': 'application/json'
+    }
 }
 
 export async function get<TData extends object>(url: string, init: RequestInit = {}): Promise<TData> {
@@ -28,7 +32,6 @@ export async function post(
 
 function handleResponse<TData>(response: Response): Promise<TData> {
     const contentType = response.headers.get('content-type') ?? '';
-    console.log('GOT TYPE', response.headers);
     if (contentType.includes('application/json')) {
         return response.json() as Promise<TData>;
     } else if (contentType.includes('text/plain')) {

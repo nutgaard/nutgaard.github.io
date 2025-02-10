@@ -1,3 +1,4 @@
+import 'server-only';
 import * as http from "@/resources/utils";
 
 export type GithubRepo = {
