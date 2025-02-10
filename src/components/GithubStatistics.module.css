@@ -1,0 +1,11 @@
+.wrapper {
+    margin-bottom: 1.5rem;
+
+    & dt {
+        font-weight: bold;
+        display: inline-block;
+    }
+    & dd {
+        display: inline-block;
+    }
+}

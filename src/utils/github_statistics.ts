@@ -35,7 +35,7 @@ type RepoWithValue = {
     repo: GithubRepo;
     count: number
 }
-type GithubStatistics = {
+export type GithubStatistics = {
     count: number;
     lastUpdated: GithubRepo;
     mostWatched: RepoWithValue;

@@ -1,5 +1,7 @@
 import {fetchRepos} from "@/resources/github";
 import githubStatistics from "@/utils/github_statistics";
+import {GithubStatistics} from "@/components/GithubStatistics";
+import {Repositories} from "@/components/Repositories";
 
 export default async function Repos() {
     const repos = await fetchRepos();
@@ -7,9 +9,8 @@ export default async function Repos() {
 
     return (
         <div>
-            <p>Found {repos.length} repos</p>
-
-            <pre>{JSON.stringify(statistics, null, 2)}</pre>
+            <GithubStatistics statistics={statistics} />
+            <Repositories repositories={repos} />
         </div>
     );
 }

@@ -1,0 +1,23 @@
+.wrapper {
+    margin-bottom: 2rem;
+}
+
+.repository {
+    display: inline-block;
+    padding: 1rem;
+    border-radius: 4px;
+    background-color: white;
+    border: 1px solid #c9c9c9;
+    transition: all 200ms;
+
+    & h3 {
+        text-decoration: underline;
+        font-weight: lighter;
+        margin-bottom: 0.75rem;
+    }
+
+    &:hover {
+        scale: 1.01;
+        background: rgb(from var(--accent) r g b / 50%);
+    }
+}
