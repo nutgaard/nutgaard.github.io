@@ -1,3 +1,5 @@
+import * as http from "@/resources/utils";
+
 export type GithubRepo = {
     name: string;
     has_pages: boolean;
@@ -12,11 +14,6 @@ export type GithubRepo = {
 };
 
 const url = (page: number) => `https://api.github.com/users/nutgaard/repos?per_page=100&page=${page}`;
-
-async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
-    console.log('Fetching', url);
-    return fetch(url, init).then(r => r.json());
-}
 
 function sort(list: Array<GithubRepo>): Array<GithubRepo> {
     return list
@@ -41,7 +38,7 @@ export async function fetchRepos(): Promise<Array<GithubRepo>> {
     let shouldContinue = true;
     try {
         do {
-            const lastRequest = await fetchJson<Array<GithubRepo>>(
+            const lastRequest = await http.get<Array<GithubRepo>>(
                 url(page),
                 { next: { revalidate: 600 } }
             );

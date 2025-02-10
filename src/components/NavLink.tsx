@@ -14,8 +14,9 @@ export function NavLink(props: NavLinkProps) {
     return (
         <Link
             href={props.href}
-            children={props.children}
             className={isActive ? `${css.link} ${css.active}` : `${css.link}`}
-        />
+        >
+            {props.children}
+        </Link>
     );
 }
