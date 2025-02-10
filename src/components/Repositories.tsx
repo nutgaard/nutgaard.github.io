@@ -9,7 +9,7 @@ type RepoProps = {
     repository: GithubRepo;
 }
 
-const hrefBase = '//www.utgaard.xyz'
+const hrefBase = '//github.utgaard.xyz'
 function Respository(props: RepoProps) {
     return (
         <a
