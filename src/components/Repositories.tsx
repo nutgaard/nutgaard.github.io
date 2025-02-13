@@ -9,17 +9,23 @@ type RepoProps = {
     repository: GithubRepo;
 }
 
-const hrefBase = '//github.utgaard.xyz'
 function Respository(props: RepoProps) {
     return (
         <a
-            href={`${hrefBase}/${props.repository.name}`}
+            href={repoUrl(props.repository)}
             className={css.repository}
         >
             <h3>{props.repository.name}</h3>
             <p>{props.repository.description}</p>
         </a>
     );
+}
+function repoUrl(repo: GithubRepo): string {
+    if (repo.name == 'nutgaard.github.io') {
+        return '/';
+    } else {
+        return `'//github.utgaard.xyz'/${repo.name}`;
+    }
 }
 
 export function Repositories(props: Props) {
