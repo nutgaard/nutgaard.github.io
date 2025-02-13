@@ -1,3 +1,5 @@
+import React from "react";
+import Link from 'next/link';
 import {GithubRepo} from "@/resources/github";
 import css from './Repositories.module.css';
 import {Grid} from "@/components/Grid";
@@ -10,21 +12,41 @@ type RepoProps = {
 }
 
 function Respository(props: RepoProps) {
+    const link = repoUrl(props.repository)
+    const anchorProps = {
+        ...link.props,
+        className: css.repository
+    };
+
     return (
-        <a
-            href={repoUrl(props.repository)}
-            className={css.repository}
-        >
-            <h3>{props.repository.name}</h3>
-            <p>{props.repository.description}</p>
-        </a>
+        React.createElement(link.type, anchorProps, (
+            <>
+                <h3>{props.repository.name}</h3>
+                <p>{props.repository.description}</p>
+            </>
+        ))
     );
 }
-function repoUrl(repo: GithubRepo): string {
+
+type LinkDescription = {
+    type: React.ElementType,
+    props: React.AnchorHTMLAttributes<HTMLAnchorElement>
+};
+function repoUrl(repo: GithubRepo): LinkDescription {
     if (repo.name == 'nutgaard.github.io') {
-        return '/';
+        return {
+            type: Link,
+            props: {
+                href: '/pages'
+            }
+        };
     } else {
-        return `'//github.utgaard.xyz'/${repo.name}`;
+        return {
+            type: 'a',
+            props: {
+                href: `//github.utgaard.xyz/${repo.name}`
+            }
+        }
     }
 }
 
