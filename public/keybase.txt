@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/nutgaard
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://www.utgaard.xyz
+  * I am nutgaard (https://keybase.io/nutgaard) on keybase.
+  * I have a public key with fingerprint 1B43 9DF8 B2DC 65BB 3513  0380 1F93 2604 B2CE 47D4
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01205c363a6f3aadfcaa16b872141a791a8f2005d440cf945245fbc8d886df786f9b0a",
+      "fingerprint": "1b439df8b2dc65bb351303801f932604b2ce47d4",
+      "host": "keybase.io",
+      "key_id": "1f932604b2ce47d4",
+      "kid": "01018a4a703432733872fb08fd4dd51f32f34fd47612de41e5afee18e7fa810c3b250a",
+      "uid": "c9967932c15e12dc260931426976ee19",
+      "username": "nutgaard"
+    },
+    "service": {
+      "hostname": "www.utgaard.xyz",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1639498157,
+  "expire_in": 157680000,
+  "prev": "4ccc7664ba9b7db7be18bae85c1133c17c4b5137bf0bbd9167fecad1740edc7c",
+  "seqno": 14,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMNxAnicbVJrUFVVFL6Xh8YrmEZDy+cRocnr5ezz2ucg5aQQFoY5kiaTXs9jn8tR
+Oedy7+Ud2BQ+YwiIoAmFxnKchrCQQYyJxw2KMUYMBVIjcaJBg0ATsyYI25fBf+0/
+e9ba3/etb629OkN8TYHm5e9H+p3tSegzd3uqMkzieU9dHiEZSg4Rk0fsQ7MX2q8g
+l9u2T1OIGIIEFMnKNEeLnEqLoqLKogg4iYcUYIAIBSDyKkWSrMIwpKwKDEsxrCrJ
+vMLznKJCnlMFiRQJC6Fquh05HU5Nd2NZIDG0oKi8RCkyx0oSzQKapHkSqAJNcSQj
+UTJioMJgYqrh8jKwOUl0Iatm4BwObLP2/gf/yDcJeJERIUkzNAVpGjtWJZJXFUZR
+WKDSlEozOIAcoBTEAMSKKkKAR1AVeUDKtESxs74zZuVkQeAgLiUDFmGCjGsKNGAo
+ToAcpgleoAs5dTENYbSe4baLolMh8i0EzmZqMvIO1tvJHCIrK8s6B7Jm5+RiusNp
+uA3Z2I8fU91uhyvGS3bnOGbRSLLN6dgkTVfwKDEjEzldmqETMQAjZbfmFQYcLTAC
+D1hoIVC2Q3Mim+ZFsJDjSXy8dVAmlmRkWYYcx0iiIEFFghLuXRIRz8oA0LQMoMxI
++E+gpJKSpAiAgyqSRQVAhkSKDGXC21m6bmBtBvsU7VjTpdl10Z3hRET+N543/Ezm
+QNM8fx/vjpkCA8IebV53a5jp2IZNhUXEiaa98bnJ5Skw6FLRM39fqRirP0lvnzA6
+o9q21b67suXGAnkVMqWUZf9+YGdU8qR+KN7wHDgSEf38S8fXMMJ6a9MXBzeP/2Qh
+xqORrTQobvHGGzk3PYum0vim+uHzjSGB/zyX2x9Q4N9+btKnr/bNc/aS4tX3hiuX
+3d4JR8ZA2/VQS4ffEsfU6TPBz1ZPpticoXkNaeTg6JHop3qTfA+vrYyrrDiW7PL3
+dSqJ4d1P1Fz87ZbUWn+z7p3tDVGwdE9t9N3r62N3XQ57uu9Wx4+XPg0LDhCSkk9G
+lJQHrHloSRKCqw7+fPVEzV+vXRwd+HxF6eHbgXf0xSXVm2e+r9FfH5pZaxS8cAjO
+fBTl+nLrvw8i4VdLV5nzR+c1Rg63LFqmBu2wZ1Khcakjv352dctg5QLdU9UzkNQ+
+/cDMvpxYNn/XmbcM44MfXkkY0xa27A0xlz8s/vDPvNqxa8Jo5P3m/vf+6G++EpzV
+SBY2FChVS9ymxPjlOzorLiRe3lDfNTWxzq/fR9hiKWo4qkd3yW3hzW8Hlg3GWr4T
+o4auJRE1IQu/Paqlh51ydkz3rGh4bPr46j29X6fs7mpb6X/n7NB0RPOIn3WodlNz
+yMbixydOo57qJ4u2tfe2zrfX3N891rK07lQs+OTgIPlLwsxdNOkTHjU08XHfuvHe
+V+si0ktzt164VxhsHXjxP/a9wfE=
+=7MeZ
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/nutgaard
+
+==================================================================
