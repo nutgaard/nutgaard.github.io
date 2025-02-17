@@ -18,13 +18,13 @@ function Respository(props: RepoProps) {
         ...link.props,
         className: css.repositoryLink
     };
-    const imgSrc = props.repository.has_pages ? props.repository.name : 'missing';
 
+    const imgSrc = props.repository.has_pages ? `/repo-img/${props.repository.name}.png` : '/repo-img/missing.svg';
     return (
         React.createElement(link.type, anchorProps, (
             <div className={css.repository}>
                 <Image
-                    src={`/repo-img/${imgSrc}.png`}
+                    src={imgSrc}
                     alt=""
                     width="100"
                     height="100"
@@ -42,6 +42,7 @@ type LinkDescription = {
     type: React.ElementType;
     props: React.AnchorHTMLAttributes<HTMLAnchorElement>;
 };
+
 function repoUrl(repo: GithubRepo): LinkDescription {
     if (repo.name == 'nutgaard.github.io') {
         return {
@@ -65,7 +66,7 @@ export function Repositories(props: Props) {
         <Grid className={css.wrapper}>
             {
                 props.repositories.map((it) => (
-                    <Respository key={it.name} repository={it} />
+                    <Respository key={it.name} repository={it}/>
                 ))
             }
         </Grid>
