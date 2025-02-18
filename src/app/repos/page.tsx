@@ -1,9 +1,9 @@
 import 'server-only';
 
-import {fetchRepos} from "@/resources/github";
+import {fetchRepos, GithubRepo} from "@/resources/github";
 import githubStatistics from "@/utils/github_statistics";
 import {GithubStatistics} from "@/components/GithubStatistics";
-import {Repositories} from "@/components/Repositories";
+import {LinkDescription, Repositories} from "@/components/Repositories";
 
 export default async function Repos() {
     const repos = await fetchRepos();
@@ -12,7 +12,16 @@ export default async function Repos() {
     return (
         <div>
             <GithubStatistics statistics={statistics} />
-            <Repositories repositories={repos} />
+            <Repositories repositories={repos} linkGenerator={linkGenerator}/>
         </div>
     );
+}
+
+function linkGenerator(repo: GithubRepo): LinkDescription {
+    return {
+        type: 'a',
+        props: {
+            href: `https://github.com/nutgaard/${repo.name}`
+        }
+    }
 }

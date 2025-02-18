@@ -1,5 +1,4 @@
 import React from "react";
-import Link from 'next/link';
 import Image from 'next/image';
 import {GithubRepo} from "@/resources/github";
 import css from './Repositories.module.css';
@@ -7,13 +6,19 @@ import {Grid} from "@/components/Grid";
 
 type Props = {
     repositories: Array<GithubRepo>;
+    linkGenerator(repository: GithubRepo): LinkDescription;
 }
 type RepoProps = {
     repository: GithubRepo;
+    linkGenerator(repository: GithubRepo): LinkDescription;
 }
+export type LinkDescription = {
+    type: React.ElementType;
+    props: React.AnchorHTMLAttributes<HTMLAnchorElement>;
+};
 
 function Respository(props: RepoProps) {
-    const link = repoUrl(props.repository)
+    const link = props.linkGenerator(props.repository)
     const anchorProps = {
         ...link.props,
         className: css.repositoryLink
@@ -38,35 +43,12 @@ function Respository(props: RepoProps) {
     );
 }
 
-type LinkDescription = {
-    type: React.ElementType;
-    props: React.AnchorHTMLAttributes<HTMLAnchorElement>;
-};
-
-function repoUrl(repo: GithubRepo): LinkDescription {
-    if (repo.name == 'nutgaard.github.io') {
-        return {
-            type: Link,
-            props: {
-                href: '/pages'
-            }
-        };
-    } else {
-        return {
-            type: 'a',
-            props: {
-                href: `//github.utgaard.xyz/${repo.name}`
-            }
-        }
-    }
-}
-
-export function Repositories(props: Props) {
+export function Repositories({ repositories, linkGenerator }: Props) {
     return (
         <Grid className={css.wrapper}>
             {
-                props.repositories.map((it) => (
-                    <Respository key={it.name} repository={it}/>
+                repositories.map((it) => (
+                    <Respository key={it.name} repository={it} linkGenerator={linkGenerator}/>
                 ))
             }
         </Grid>

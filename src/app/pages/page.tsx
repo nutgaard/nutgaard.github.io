@@ -1,9 +1,10 @@
 import 'server-only';
 
-import {fetchRepos} from "@/resources/github";
+import {fetchRepos, GithubRepo} from "@/resources/github";
 import githubStatistics from "@/utils/github_statistics";
 import {GithubStatistics} from "@/components/GithubStatistics";
-import {Repositories} from "@/components/Repositories";
+import {LinkDescription, Repositories} from "@/components/Repositories";
+import Link from "next/link";
 
 export default async function Pages() {
     const repos = await fetchRepos();
@@ -13,7 +14,25 @@ export default async function Pages() {
     return (
         <div>
             <GithubStatistics statistics={statistics} />
-            <Repositories repositories={pages} />
+            <Repositories repositories={pages} linkGenerator={linkGenerator} />
         </div>
     );
+}
+
+function linkGenerator(repo: GithubRepo): LinkDescription {
+    if (repo.name == 'nutgaard.github.io') {
+        return {
+            type: Link,
+            props: {
+                href: '/pages'
+            }
+        };
+    } else {
+        return {
+            type: 'a',
+            props: {
+                href: `//github.utgaard.xyz/${repo.name}`
+            }
+        }
+    }
 }
