@@ -1,6 +1,6 @@
 import puppeteer, {Page} from 'puppeteer';
 import {fetchRepos, GithubRepo} from '@/resources/github';
-import { list, put } from '@vercel/blob';
+import {del, list, put} from '@vercel/blob';
 import * as paths from 'node:path';
 import os from "node:os";
 
@@ -44,6 +44,8 @@ for (const repo of repos) {
             const { filename, filepath } = await screenshot(page, repo);
             console.log(`\tUploading ${filename}.`);
             await put(filename, Bun.file(filepath).stream(), { access: 'public' });
+            console.log(`\tDeleting old image ${blob.url}`);
+            await del(blob.url)
         } else {
             console.log('\tImage of GH-pages already updated.')
         }
