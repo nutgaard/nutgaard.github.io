@@ -6,10 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-repo-images": "bun run --conditions=\"react-server\" --target=bun ./img-gen/generate.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.4.1",
+    "@vercel/blob": "^0.27.1",
     "@vercel/speed-insights": "^1.1.0",
     "next": "15.1.6",
     "react": "^19.0.0",
@@ -17,13 +19,14 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@types/bun": "^1.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "puppeteer": "^24.2.1",
-    "@eslint/eslintrc": "^3"
+    "typescript": "^5"
   }
 }

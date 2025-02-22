@@ -6,10 +6,12 @@ import {Grid} from "@/components/Grid";
 
 type Props = {
     repositories: Array<GithubRepo>;
+    imageMap: Record<string, string>;
     linkGenerator(repository: GithubRepo): LinkDescription;
 }
 type RepoProps = {
     repository: GithubRepo;
+    imageMap: Record<string, string>
     linkGenerator(repository: GithubRepo): LinkDescription;
 }
 export type LinkDescription = {
@@ -24,7 +26,9 @@ function Respository(props: RepoProps) {
         className: css.repositoryLink
     };
 
-    const imgSrc = props.repository.has_pages ? `/repo-img/${props.repository.name}.png` : '/repo-img/missing.svg';
+    const imgSrc = props.imageMap[`${props.repository.name}.png`]
+        ?? props.imageMap['404.svg'];
+
     return (
         React.createElement(link.type, anchorProps, (
             <div className={css.repository}>
@@ -43,12 +47,12 @@ function Respository(props: RepoProps) {
     );
 }
 
-export function Repositories({ repositories, linkGenerator }: Props) {
+export function Repositories({ repositories, linkGenerator, imageMap }: Props) {
     return (
         <Grid className={css.wrapper}>
             {
                 repositories.map((it) => (
-                    <Respository key={it.name} repository={it} linkGenerator={linkGenerator}/>
+                    <Respository key={it.name} repository={it} linkGenerator={linkGenerator} imageMap={imageMap}/>
                 ))
             }
         </Grid>
