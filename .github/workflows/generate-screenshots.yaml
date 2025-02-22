@@ -1,7 +1,7 @@
 name: Generate repositoty images
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '30 4/12 * * *'
   workflow_dispatch:
 
 jobs:
