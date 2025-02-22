@@ -5,7 +5,7 @@ import githubStatistics from "@/utils/github_statistics";
 import {GithubStatistics} from "@/components/GithubStatistics";
 import {LinkDescription, Repositories} from "@/components/Repositories";
 import Link from "next/link";
-import {list, ListBlobResultBlob} from '@vercel/blob';
+import {list} from '@vercel/blob';
 
 export default async function Pages() {
     const repos = await fetchRepos();
