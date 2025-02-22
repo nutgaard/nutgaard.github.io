@@ -9,7 +9,13 @@ const repos = await fetchRepos();
 const pages = repos.filter(it => it.has_pages);
 console.log(`Found ${repos.length} repositories, ${pages.length} with pages`);
 
-const browser = await puppeteer.launch();
+const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+    ]
+});
 const page = await browser.newPage();
 
 const blobsStorage = await list({ limit: pages.length + 10 });
