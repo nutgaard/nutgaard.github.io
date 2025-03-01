@@ -3,6 +3,7 @@ import Image from 'next/image';
 import {GithubRepo} from "@/resources/github";
 import css from './Repositories.module.css';
 import {Grid} from "@/components/Grid";
+import {PadlockSvg} from "./PadlockSvg";
 
 type Props = {
     repositories: Array<GithubRepo>;
@@ -32,12 +33,15 @@ function Respository(props: RepoProps) {
     return (
         React.createElement(link.type, anchorProps, (
             <div className={css.repository}>
-                <Image
-                    src={imgSrc}
-                    alt=""
-                    width="100"
-                    height="100"
-                />
+                <div className={css.repositoryImage}>
+                    <Image
+                        src={imgSrc}
+                        alt=""
+                        width="100"
+                        height="100"
+                    />
+                    {props.repository.private && <PadlockSvg className={css.overlay}/>}
+                </div>
                 <div>
                     <h3>{props.repository.name}</h3>
                     <p>{props.repository.description}</p>

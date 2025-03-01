@@ -22,6 +22,7 @@ function findMax<T>(extract: (arg: T) => number | string): (value: T, other: T) 
 
 const notFoundRepo : GithubRepo = {
     name: 'Not found',
+    private: false,
     has_pages: false,
     watchers_count: 0,
     fork: false,

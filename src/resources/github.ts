@@ -3,6 +3,7 @@ import * as http from "@/resources/utils";
 
 export type GithubRepo = {
     name: string;
+    private: boolean;
     has_pages: boolean;
     description?: string;
     watchers_count: number;
@@ -14,7 +15,7 @@ export type GithubRepo = {
     updated_at: string;
 };
 
-const url = (page: number) => `https://api.github.com/users/nutgaard/repos?per_page=100&page=${page}`;
+const url = (page: number) => `https://api.github.com/user/repos?per_page=100&page=${page}&affiliation=owner`;
 
 function sort(list: Array<GithubRepo>): Array<GithubRepo> {
     return list
@@ -41,7 +42,13 @@ export async function fetchRepos(): Promise<Array<GithubRepo>> {
         do {
             const lastRequest = await http.get<Array<GithubRepo>>(
                 url(page),
-                { next: { revalidate: 600 } }
+                {
+                    headers: {
+                        "Authorization": `Bearer ${process.env.GH_TOKEN}`,
+                        "Accept": "application/vnd.github.v3+json",
+                    },
+                    next: { revalidate: 600 }
+                }
             );
             repos = repos.concat(lastRequest);
             page++;
