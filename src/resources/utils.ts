@@ -30,9 +30,11 @@ export async function post(
     return handleResponse(response);
 }
 
-function handleResponse<TData>(response: Response): Promise<TData> {
+async function handleResponse<TData>(response: Response): Promise<TData> {
     const contentType = response.headers.get('content-type') ?? '';
-    if (contentType.includes('application/json')) {
+    if (!response.ok) {
+        return Promise.reject(await response.json());
+    } else if (contentType.includes('application/json')) {
         return response.json() as Promise<TData>;
     } else if (contentType.includes('text/plain')) {
         return response.text() as unknown as  Promise<TData>;
