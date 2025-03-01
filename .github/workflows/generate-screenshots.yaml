@@ -14,4 +14,6 @@ jobs:
       - run: bun i
       - run: bun run generate-repo-images
         env:
+          # Custom token to allow reading other repos
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           BLOB_READ_WRITE_TOKEN: ${{ secrets.VERCEL_BLOB_READ_WRITE_TOKEN }}
