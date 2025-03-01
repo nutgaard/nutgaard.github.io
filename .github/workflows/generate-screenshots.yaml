@@ -1,4 +1,4 @@
-name: Generate repositoty images
+name: Generate repository images
 on:
   schedule:
     - cron: '15 2,14 * * *'
@@ -6,7 +6,7 @@ on:
 
 jobs:
   generate:
-    name: Generate repositoty images
+    name: Generate repository images
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
