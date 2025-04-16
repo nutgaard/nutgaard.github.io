@@ -4,6 +4,7 @@ import {ListBlobResultBlob} from "@vercel/blob";
 import {Page} from "puppeteer";
 import paths from "node:path";
 import os from "node:os";
+import {compactTable, Table} from "./table";
 
 export type Action = IgnoreAction | DeleteAction | UpdateAction | CreateAction;
 export type ActionType = Action['action'];
@@ -77,9 +78,15 @@ export async function addSummaryToOutput(actions: SummaryAction[]) {
 
     core.summary.addBreak();
     core.summary.addHeading('Actions taken');
+
+    const actionsTable: Table = compactTable({
+        headers: ['Repository', 'Action'],
+        rows: actions.map((it) => [it.name, it.action])
+    });
+
     core.summary.addTable([
-        [header('Repository'), header('Action')],
-        ...actions.map((it) => [it.name, it.action])
+        actionsTable.headers.map(it => ({ data: it, header: true })),
+        ...actionsTable.rows
     ]);
 
     await core.summary.write();
