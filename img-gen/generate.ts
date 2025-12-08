@@ -46,11 +46,13 @@ for (const actionToTake of actionsToTake) {
         await del(actionToTake.blob.url);
     } else if (action == 'CREATE') {
         console.log(`\tScreenshotting ${repository.name} because image was missing.`);
+        // eslint-disable-next-line @typescript-eslint/no-extra-non-null-assertion
         const { filename, filepath } = await screenshot(page!!, repository);
         console.log(`\tUploading ${filename}.`);
         await put(filename, Bun.file(filepath).stream(), { access: 'public' });
     } else if (action == 'UPDATE') {
         console.log(`\tScreenshotting ${repository.name} because of updated repository.`);
+        // eslint-disable-next-line @typescript-eslint/no-extra-non-null-assertion
         const { filename, filepath } = await screenshot(page!!, repository);
         console.log(`\tUploading ${filename}.`);
         await put(filename, Bun.file(filepath).stream(), { access: 'public' });

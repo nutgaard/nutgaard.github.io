@@ -33,30 +33,32 @@ function sort(list: Array<GithubRepo>): Array<GithubRepo> {
         });
 }
 
-
 export async function fetchRepos(): Promise<Array<GithubRepo>> {
+    const repos = await paginate<GithubRepo>(url);
+    return sort(repos);
+}
+
+export async function paginate<T>(
+    urlFactory: (page: number) => string
+): Promise<T[]> {
     let page = 1;
-    let repos : Array<GithubRepo> = [];
+    let data: T[] = [];
     let shouldContinue = true;
+
     try {
         do {
-            const lastRequest = await http.get<Array<GithubRepo>>(
-                url(page),
-                {
-                    headers: {
-                        "Authorization": `Bearer ${process.env.GH_TOKEN}`,
-                        "Accept": "application/vnd.github.v3+json",
-                    },
-                    next: { revalidate: 600 }
-                }
-            );
-            repos = repos.concat(lastRequest);
-            page++;
-            shouldContinue = lastRequest.length === 100;
+            const response = await http.get<T[]>(urlFactory(page++), {
+                headers: {
+                    "Authorization": `Bearer ${process.env.GH_TOKEN}`,
+                    "Accept": "application/vnd.github.v3+json",
+                },
+                next: { revalidate: 600 }
+            });
+            data = data.concat(response);
+            shouldContinue = response.length === 100;
         } while (shouldContinue);
-
-        return Promise.resolve(sort(repos));
+        return data;
     } catch (e) {
-        return Promise.reject(e)
+        return Promise.reject(e);
     }
 }

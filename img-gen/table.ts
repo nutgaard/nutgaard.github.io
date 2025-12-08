@@ -14,7 +14,7 @@ export function compactTable(table: Table, maxColCount: number = 3): Table {
 
     const tableRows: Row[] = [];
     for (let i = 0; i < chunksizes; i++) {
-        let row: Row = [];
+        const row: Row = [];
         for (let chunkIdx = 0; chunkIdx < nofChunks; chunkIdx++) {
             const chunk = chunks[chunkIdx];
             if (i >= chunk.length) {
